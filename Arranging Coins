@@ -1,0 +1,15 @@
+class Solution {
+public:
+    int arrangeCoins(int n) {
+        int temp = n  , ans = 0;
+        if(n == 1) return 1;
+        for(int i = 0; i<=n;i++){
+            if(i > temp){
+               ans= i-1;
+               break;
+            }
+            temp -= i;
+        }
+        return ans;
+    }
+};
