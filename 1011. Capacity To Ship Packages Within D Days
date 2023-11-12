@@ -1,0 +1,34 @@
+class Solution {
+public:
+bool ispossible(vector<int>& weights,int mid, int days){
+    int n = weights.size();
+    int curr_weight =0;
+    int req_day = 1;
+        for(int i =0;i<n;i++){
+            if(curr_weight+weights[i] <= mid) curr_weight += weights[i];
+            else {
+                req_day++;
+                 curr_weight = weights[i];
+            }
+        }
+        return req_day <= days;
+}
+    int shipWithinDays(vector<int>& weights, int days) {
+        int n = weights.size();
+        int low = *max_element(weights.begin(),weights.end());
+        int high =0;
+        for(int i =0;i<n;i++) high +=weights[i];
+
+        int mini = low;
+        while(low<=high){
+            int mid = low + (high-low)/2;
+
+            if(ispossible(weights,mid,days)){
+                mini = mid;
+                high = mid-1;
+            } else low = mid+1;
+
+        }
+        return mini;
+    }
+};
