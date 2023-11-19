@@ -1,0 +1,23 @@
+class Solution {
+public:
+    bool uniqueOccurrences(vector<int>& arr) {
+        
+  unordered_map<int,int>freq;
+        
+        //finding the frequency of every element
+        for(auto x:arr)
+        {
+            freq[x]++;
+        }
+        
+        //Now we will store the frequency of every element in set
+        unordered_set<int>s;
+        for(auto x: freq)
+        {
+            s.insert(x.second);
+        }
+        //if the size of set is same as the size of map that means
+		//there is no element with same frequency return true 
+        return freq.size()==s.size();
+    }
+};
