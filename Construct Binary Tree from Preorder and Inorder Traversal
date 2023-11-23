@@ -1,0 +1,27 @@
+class Solution {
+public:
+    TreeNode* solve(vector<int>& preorder, vector<int>& inorder,int pres,int pree,int ins,int ine ,map<int,int>& mp){
+        if(pres>pree || ins>ine) return NULL;
+
+        TreeNode* root = new TreeNode(preorder[pres]);
+        int elem = mp[root->val];
+        int nElem = elem - ins;
+
+        root->left = solve(preorder,inorder,pres+1,pres+nElem,ins,elem-1,mp);
+        root->right = solve(preorder,inorder,pres+nElem+1,pree,elem+1,ine,mp);
+        return root;
+    }
+
+    
+    TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
+     //pres = preorderStart,pree = preorderEnd
+     //ins = inorderStart,ine = inorderEnd
+        int pres = 0 , pree = preorder.size()-1;
+        int ins = 0, ine = inorder.size()-1;
+
+        map<int,int>mp;
+        for(int i=ins;i<=ine;i++) mp[inorder[i]] = i;
+
+       return solve(preorder,inorder,pres,pree,ins,ine,mp);
+    }
+};
