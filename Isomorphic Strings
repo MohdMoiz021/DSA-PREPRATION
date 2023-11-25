@@ -1,0 +1,16 @@
+class Solution {
+public:
+    bool isIsomorphic(string s, string t) {
+        map<int,int> mp;
+        set<char> set;
+        int n = s.length()-1;
+        while(n>=0){
+        if(mp.count(s[n]) && mp[s[n]] !=t[n]) return false;
+        if(!mp.count(s[n]) && set.count(t[n])) return false;
+        set.insert(t[n]);
+        mp[s[n]] = t[n];
+        n--;
+        }
+         return true;
+    }
+};
