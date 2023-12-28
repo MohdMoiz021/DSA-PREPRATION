@@ -1,0 +1,27 @@
+class Solution {
+    private:
+    void combination(int ind,int k,int n, vector<vector<int>>& ans,int sum, vector<int>& ds){
+        if(ds.size() == k){
+            if(sum == n){
+                ans.push_back(ds);
+            }
+            return;
+        }
+        for(int i =ind;i<=9;i++){
+            if(i>n) break;
+            sum = sum+i;
+            ds.push_back(i);
+            combination(i+1,k,n,ans,sum,ds);
+            ds.pop_back();
+            sum = sum-i;
+        }
+    }
+public:
+    vector<vector<int>> combinationSum3(int k, int n) {
+        vector<vector<int>> ans;
+        vector<int> ds;
+        int sum =0;
+        combination(1,k,n,ans,sum,ds);
+        return ans;
+    }
+};
