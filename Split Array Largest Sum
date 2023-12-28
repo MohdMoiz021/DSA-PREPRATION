@@ -1,0 +1,28 @@
+class Solution {
+public:
+      int partitiong(vector<int>& a, int maxsum){
+           int n = a.size();
+           int partition = 1;
+           long long subarray = 0;
+           for(int i =0;i<n;i++){
+               if(subarray + a[i] <= maxsum) subarray += a[i];
+               else {
+                   partition++;
+                   subarray = a[i];
+               }
+           }
+           return partition;
+      }
+    int splitArray(vector<int>& a, int k) {
+        int low = *max_element(a.begin(),a.end());
+        int high = accumulate(a.begin(),a.end(),0);
+
+        while(low<=high){
+            int mid = (low+high)/2;
+            int partition = partitiong(a,mid);
+            if(partition > k) low = mid+1;
+            else high = mid-1;
+        }
+        return low;
+    }
+};
